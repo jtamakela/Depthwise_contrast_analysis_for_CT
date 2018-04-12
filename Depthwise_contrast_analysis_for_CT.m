@@ -6,7 +6,7 @@ function [PROFILES_NORMALIZED, PROFILES_ORIGINAL, info] = Depthwise_contrast_ana
 %% Made in a hurry. Could be 10^12 times more effective, but seems to be doing the job
 %% Especially orientation-function is really inefficient 
 
-%clear all, close all, clc;
+clear all, close all, clc;
 
 lowerlimit = -100; %Excludes all the pixels below this. Background needs to be excluded in order to calculate averages correctly without the background
 % upperlimit = 3000; %Upper limit can be added
@@ -15,7 +15,7 @@ lowerlimit = -100; %Excludes all the pixels below this. Background needs to be e
 [Dicoms, info] = load_dicoms;
 
 %To HU's
-% Dicoms = Dicoms.*info.RescaleSlope+info.RescaleIntercept;
+Dicoms = Dicoms.*info.RescaleSlope+info.RescaleIntercept;
 
 %Function for an average image from slides for picking plugs
 createdicommasks(Dicoms);
@@ -104,6 +104,8 @@ PROFILES_NORMALIZED(:,N) = interp1(linspace(1,100,numel(result)), result, [1:100
 
 Thegreatdecider = menu('Again?', '1) Yes please, this is great!!!', '2) Please, not anymore :(');
 
+save('DICOM_temp.mat','PROFILES_NORMALIZED') % In case the code crashes
+
 if Thegreatdecider == 2
     %Plot the profiles
     figure(5); %Use existing figure
@@ -116,6 +118,8 @@ if Thegreatdecider == 2
     
     figure(1); %Brings the first figure on top
     title('The plugs');
+    
+    rm 'DICOM_temp.mat' %No need for this if the code executes succesfully
 end
 
 end %while Thegreatdecider
