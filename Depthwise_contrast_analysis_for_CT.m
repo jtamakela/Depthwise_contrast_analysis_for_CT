@@ -102,25 +102,7 @@ PROFILES_NORMALIZED(:,N) = interp1(linspace(1,100,numel(result)), result, [1:100
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
-Thegreatdecider = menu('Again?', '1) Yes please, this is great!!!', '2) Please, not anymore :(');
-
-save('DICOM_temp.mat','PROFILES_NORMALIZED') % In case the code crashes
-
-if Thegreatdecider == 2
-    %Plot the profiles
-    figure(5); %Use existing figure
-    plot(PROFILES_NORMALIZED);
-    legend_legend = [1:N]';
-    legend(num2str(legend_legend),'location','Northwest')
-    title('The Profiles')
-    xlabel('Normalized thickness (%)');
-    ylabel('Pixel value');
-    
-    figure(1); %Brings the first figure on top
-    title('The plugs');
-    
-    rm 'DICOM_temp.mat' %No need for this if the code executes succesfully
-end
+Thegreatdecider = Ultimatequestion(); % Asks if you want to continue
 
 end %while Thegreatdecider
 
@@ -572,7 +554,34 @@ end %direction_question == 2;
 
     end
 
+%% 
+% Asks if you want to continue
 
+function Thegreatdecider = Ultimatequestion();
+    
+figure(1) %Show this figure, so you know how many you've done
+    
+Thegreatdecider = menu('Again?', '1) Yes please, this is great!!!', '2) Please, not anymore :(');
+
+save('DICOM_temp.mat','PROFILES_NORMALIZED') % In case the code crashes
+
+if Thegreatdecider == 2
+    %Plot the profiles
+    figure(5); %Use existing figure
+    plot(PROFILES_NORMALIZED);
+    legend_legend = [1:N]';
+    legend(num2str(legend_legend),'location','Northwest')
+    title('The Profiles')
+    xlabel('Normalized thickness (%)');
+    ylabel('Pixel value');
+    
+    figure(1); %Brings the first figure on top
+    title('The plugs');
+    
+    delete 'DICOM_temp.mat' %No need for this if the code executes succesfully
+end
+
+end
 
 
 end
