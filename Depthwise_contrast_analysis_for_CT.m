@@ -1,7 +1,8 @@
 function [PROFILES_NORMALIZED, PROFILES_ORIGINAL, info] = Depthwise_contrast_analysis_for_CT
 %% m-file for analysing uCT-figures depth-depentently
 %% Intended for 7 mm osteochondral plugs. Change used diameter in create_SUBIM() function 
-%% Gives raw pixel values. If you want results in Hounsfields, uncomment line 18
+%% Gives the same pixel values as Analyze, so you can use the Google Drive instructions to convert to HU
+%% If you want linear attenuation, uncomment line 100
 %% (c) Janne Mäkelä 06/2017
 %% Made in a hurry. Could be 10^12 times more effective, but seems to be doing the job
 %% Especially orientation-function is really inefficient 
@@ -12,10 +13,11 @@ lowerlimit = -100; %Excludes all the pixels below this. Background needs to be e
 % upperlimit = 3000; %Upper limit can be added
 
 % LOAD IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[Dicoms, info] = load_dicoms;
+[Dicoms, info] = load_dicoms; 
 
-%To HU's
-Dicoms = Dicoms.*info.RescaleSlope+info.RescaleIntercept;
+
+Dicoms = Dicoms.*info.RescaleSlope+info.RescaleIntercept; %Uses the same pixel values as Analyze (The script is optimized for this scale)
+% Otherwise handles data using native pixel values (original, short integer value)
 
 %Function for an average image from slides for picking plugs
 createdicommasks(Dicoms);
@@ -92,8 +94,14 @@ end
 end
 
 % % % % % % Calculate averages from slices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 result = calculate_pixelvalues(ROT_SUBIM);
+
+% Uncomment if you want results in linear attenuation coefficient (mu [1/cm])
+% result = ((result - info.RescaleIntercept ) / info.RescaleSlope) ./ info.Private_0029_1000; %Divided by 4096 -> linear attenuation coefficient mu
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% uncomment the following if you want mu to mg HA/ccm
+% result = result.*info.RescaleSlope+info.RescaleIntercept; 
+
 
 %Add into overall results:
 PROFILES_ORIGINAL{N} = result;
