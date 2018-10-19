@@ -7,6 +7,8 @@ function [PROFILES_NORMALIZED, PROFILES_ORIGINAL, info] = Depthwise_contrast_ana
 %% Made in a hurry. Could be 10^12 times more effective, but seems to be doing the job
 %% Especially orientation-function is really inefficient 
 
+% Testaan vaan toimiiko ZBookissa
+
 clear all, close all, clc;
 
 lowerlimit = -100; %Excludes all the pixels below this. Background needs to be excluded in order to calculate averages correctly without the background
@@ -70,7 +72,7 @@ if slider_question == 1 %Make a new SUBIM and ask for a new run
     h = waitbar(0,'Creating a new image stack, please wait...'); %Display waitbar
     for i = 1:size(ROT_SUBIM,3)
         for j = 1:size(ROT_SUBIM,1)
-                SUBIM(:,i,j) = ROT_SUBIM(j,:,i);
+            SUBIM(:,i,j) = ROT_SUBIM(j,:,i);
         end
         waitbar(i/size(ROT_SUBIM,3));
     end
@@ -80,7 +82,7 @@ if slider_question == 1 %Make a new SUBIM and ask for a new run
     
     %Make new masks
     [dicom_swmask, dicom_swmask_y] = maskcreator(SUBIM);
-
+    
     new_question = menu('Does the figure still need to be aligned:','1) Yes','2) No');
 else
     slider_question = 3;
@@ -188,7 +190,7 @@ hold on;
     % 1 pix = 0.036 mm
     % -> 110 pixels equal roughly 8mm diameter
     % -> 100 pixels = 7.2 mm
-    square_radius = 110; %Square size 
+    square_radius = 14; %110; %Square size 
     buffer = 5; %How much of the figure is cropped from corners
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
