@@ -7,8 +7,6 @@ function [PROFILES_NORMALIZED, PROFILES_ORIGINAL, info] = Depthwise_contrast_ana
 %% Made in a hurry. Could be 10^12 times more effective, but seems to be doing the job
 %% Especially orientation-function is really inefficient 
 
-% Testaan vaan toimiiko ZBookissa
-
 clear all, close all, clc;
 
 lowerlimit = -100; %Excludes all the pixels below this. Background needs to be excluded in order to calculate averages correctly without the background
