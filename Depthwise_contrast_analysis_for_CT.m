@@ -15,7 +15,6 @@ lowerlimit = -100; %Excludes all the pixels below this. Background needs to be e
 % LOAD IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [Dicoms, info] = load_dicoms; 
 
-%Testilisäys Mikaelille
 
 Dicoms = Dicoms.*info.RescaleSlope+info.RescaleIntercept; %Uses the same pixel values as Analyze (The script is optimized for this scale)
 % Otherwise handles data using native pixel values (original, short integer value)
