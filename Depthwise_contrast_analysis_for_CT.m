@@ -15,6 +15,7 @@ lowerlimit = -100; %Excludes all the pixels below this. Background needs to be e
 % LOAD IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [Dicoms, info] = load_dicoms; 
 
+%Testilisäys Mikaelille
 
 Dicoms = Dicoms.*info.RescaleSlope+info.RescaleIntercept; %Uses the same pixel values as Analyze (The script is optimized for this scale)
 % Otherwise handles data using native pixel values (original, short integer value)
@@ -126,7 +127,7 @@ path = uigetdir; %Choose the folder where the DICOMS are
 
 f = filesep; %Checks what's the file separator for current operating system (windows,unix,linux)
 
-dicomnames = dir([num2str(path) f '*.DCM*']); %Read dicoms. 
+dicomnames = dir([num2str(path) f '*.dcm*']); %Read dicoms. 
 disp(['Folder: ', dicomnames(1).folder]); %display folder
 %Dicom info
 info = dicominfo([num2str(path) f dicomnames(1).name]);
@@ -188,7 +189,7 @@ hold on;
     % 1 pix = 0.036 mm
     % -> 110 pixels equal roughly 8mm diameter
     % -> 100 pixels = 7.2 mm
-    square_radius = 14; %110; %Square size 
+    square_radius = 210;%14; %110; %Square size 
     buffer = 5; %How much of the figure is cropped from corners
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
