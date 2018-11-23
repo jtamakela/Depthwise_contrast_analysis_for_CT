@@ -126,7 +126,7 @@ path = uigetdir; %Choose the folder where the DICOMS are
 
 f = filesep; %Checks what's the file separator for current operating system (windows,unix,linux)
 
-dicomnames = dir([num2str(path) f '*.dcm*']); %Read dicoms. 
+dicomnames = dir([num2str(path) f '*.DCM*']); %Read dicoms. 
 disp(['Folder: ', dicomnames(1).folder]); %display folder
 %Dicom info
 info = dicominfo([num2str(path) f dicomnames(1).name]);
