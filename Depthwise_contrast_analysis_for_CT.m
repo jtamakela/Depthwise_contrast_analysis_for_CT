@@ -1,4 +1,4 @@
-function [PROFILES_NORMALIZED, PROFILES_ORIGINAL, info] = Depthwise_contrast_analysis_for_CT
+function [PROFILES_NORMALIZED, PROFILES_ORIGINAL, info, SUBIM] = Depthwise_contrast_analysis_for_CT
 %% m-file for analysing uCT-figures depth-depentently
 %% Intended for 7 mm osteochondral plugs. Change used diameter in create_SUBIM() function 
 %% Gives the same pixel values as Analyze, so you can use the Google Drive instructions to convert to HU
@@ -188,7 +188,7 @@ hold on;
     % 1 pix = 0.036 mm
     % -> 110 pixels equal roughly 8mm diameter
     % -> 100 pixels = 7.2 mm
-    square_radius = 210;%14; %110; %Square size 
+    square_radius = 14; %110; %Square size 
     buffer = 5; %How much of the figure is cropped from corners
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
