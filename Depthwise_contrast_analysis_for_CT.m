@@ -10,7 +10,8 @@ function [PROFILES_NORMALIZED, PROFILES_ORIGINAL, info, SUBIM] = Depthwise_contr
 clear all, close all, clc;
 
 lowerlimit = -10000; %Excludes all the pixels below this. Background needs to be excluded in order to calculate averages correctly without the background
-% ^---- Between -100 and -10000 no difference in TaO2 Nanoparticle measurements
+% For CA4+ -100 is a good treshold
+% Between -100 and -10000 no difference in TaO2 Nanoparticle measurements
 
 % upperlimit = 3000; %Upper limit can be added
 
