@@ -9,7 +9,9 @@ function [PROFILES_NORMALIZED, PROFILES_ORIGINAL, info, SUBIM] = Depthwise_contr
 
 clear all, close all, clc;
 
-lowerlimit = -100; %Excludes all the pixels below this. Background needs to be excluded in order to calculate averages correctly without the background
+lowerlimit = -10000; %Excludes all the pixels below this. Background needs to be excluded in order to calculate averages correctly without the background
+% ^---- Between -100 and -10000 no difference in TaO2 Nanoparticle measurements
+
 % upperlimit = 3000; %Upper limit can be added
 
 % LOAD IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -188,7 +190,7 @@ hold on;
     % 1 pix = 0.036 mm
     % -> 110 pixels equal roughly 8mm diameter
     % -> 100 pixels = 7.2 mm
-    square_radius = 14; %110; %Square size 
+    square_radius = 110; %110; %Square size 
     buffer = 5; %How much of the figure is cropped from corners
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
